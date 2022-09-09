@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import FileImport from './pages/fileImport';
 import Navbar from './components/navbar';
 import OrderForm from './pages/orderform';
 import Orders from './pages/orders';
@@ -10,7 +10,7 @@ import ProductForm from './pages/productform';
 function App() {
   return (
     <>
-     <BrowserRouter>
+     {/* <BrowserRouter>
       <Routes>
       <Route path="/" element={<Navbar/>}>
         <Route path="/orders" element={<Orders/>}/>
@@ -21,7 +21,8 @@ function App() {
       </Routes>
       
 
-    </BrowserRouter>  
+    </BrowserRouter>   */}
+    <FileImport/>
     </>
   );
 }
