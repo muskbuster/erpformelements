@@ -10,7 +10,7 @@ import ProductForm from './pages/productform';
 function App() {
   return (
     <>
-     {/* <BrowserRouter>
+     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Navbar/>}>
         <Route path="/orders" element={<Orders/>}/>
@@ -21,8 +21,8 @@ function App() {
       </Routes>
       
 
-    </BrowserRouter>   */}
-    <FileImport/>
+    </BrowserRouter>  
+  
     </>
   );
 }

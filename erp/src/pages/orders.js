@@ -1,137 +1,45 @@
 import { Link } from "react-router-dom";
 import "/workspace/erpformelements/erp/src/pages/orders.css"
+import React, { useState, useEffect } from 'react';
+import db from "/workspace/erpformelements/erp/src/pages/db.js";
+import { setDoc, doc, getDocs, collection } from "firebase/firestore";
+import { uuidv4 } from "@firebase/util";
 
 export default function Orders(){
-    return(
-        <>
-        <table class="my_table">
-  <tr>
-    <th>Column 1</th>
-    <th>Column 2</th>
-    <th>Column 3</th>
-    <th>Column 4</th>
-    <th>Column 5</th>
-    <th>Column 6</th>
-    <th>Column 7</th>
-    <th>Column 8</th>
-  </tr>
-  <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-    <tr>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-    <td>text</td>
-  </tr>
-</table>
 
-        <div>
+  const [orders,setOrders]=useState([])
+  useEffect(() => {
+    fetchDocs();
+  }, [])
+
+  const fetchDocs=async()=>{
+    const data=await getDocs(collection(db, "PRODUCTS"));
+    data.forEach((item)=>{
+      setOrders([...orders,item.data()])
+    })
+};
+return (
+  <>
+  <h1>How to display JSON data to table in React JS</h1>
+  <tbody>
+      <tr>
+          <th>User Id</th>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Description</th>
+      </tr>
+      {orders.map((order, i) => (
+          <tr key={i}>
+              <td>{order.pend}</td>
+              <td>{order.rate}</td>
+          </tr>
+      ))}
+  </tbody>
+  <div>
         <Link to="/orderform">
             <button>Create orders </button>
             </Link>
         </div>
-        </>
-    )
+</>
+);
 }
