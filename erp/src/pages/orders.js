@@ -8,6 +8,7 @@ import { uuidv4 } from "@firebase/util";
 export default function Orders(){
 
   const [orders,setOrders]=useState([])
+  const[id, setId] = useState()
   useEffect(() => {
     fetchDocs();
   }, [])
@@ -15,12 +16,15 @@ export default function Orders(){
   const fetchDocs=async()=>{
     const data=await getDocs(collection(db, "PRODUCTS"));
     data.forEach((item)=>{
-      setOrders([...orders,item.data()])
+      // console.log(item.id ,'=>', item.data())
+      setId(item.id)
+      console.log(item.id)
+      setOrders(orders => [...orders,item.data()])
+      console.log(orders)
     })
 };
 return (
-  <>
-  <h1>How to display JSON data to table in React JS</h1>
+  
   <tbody>
       <tr>
           <th>User Id</th>
@@ -28,18 +32,18 @@ return (
           <th>Title</th>
           <th>Description</th>
       </tr>
-      {orders.map((order, i) => (
-          <tr key={i}>
+      {orders.map((order) => (
+          <tr key={id}>
               <td>{order.pend}</td>
               <td>{order.rate}</td>
           </tr>
       ))}
   </tbody>
-  <div>
-        <Link to="/orderform">
-            <button>Create orders </button>
-            </Link>
-        </div>
-</>
+  // <div>
+  //       <Link to="/orderform">
+  //           <button>Create orders </button>
+  //           </Link>
+  //       </div>
+
 );
 }
