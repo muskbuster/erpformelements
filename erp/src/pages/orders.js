@@ -9,8 +9,10 @@ export default function Orders(){
 
   const [orders,setOrders]=useState([])
   const[id, setId] = useState()
+  const [docRec, setDocRec] = useState(false)
+
   useEffect(() => {
-    fetchDocs();
+     fetchDocs();
   }, [])
 
   const fetchDocs=async()=>{
@@ -20,7 +22,7 @@ export default function Orders(){
       setId(item.id)
       console.log(item.id)
       setOrders(orders => [...orders,item.data()])
-      console.log(orders)
+      setDocRec(true)
     })
 };
 return (
